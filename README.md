@@ -20,7 +20,7 @@ You should look at the demo project, but here is the first steps to get it worki
 
 Install NuGet package(s) : 
 - The first one is mandatory : AspNetCore.ClassicBundles
-- The second one is optional, but it will help AspNetCore.ClassicBundle.TagHelpers. It will allow you to use some tag helpers instead of @Scripts.Render and @Styles.Render.
+- The second one is optional : AspNetCore.ClassicBundle.TagHelpers. It will allow you to use some tag helpers instead of @Scripts.Render and @Styles.Render.
 
 Note : Packages are currently available in a pre-release state.
 
@@ -67,7 +67,7 @@ and
  @Scripts.Render("~/js/my-little-bundle.js")
 ```
 
-If you want to the Asp.Net Core TagHelpers, you can use
+If you want to use  Asp.Net Core Tag Helpers, you can use
 
 ```html
  <vc:script-renderer bundle-path="~/js/my-little-bundle.js" />
