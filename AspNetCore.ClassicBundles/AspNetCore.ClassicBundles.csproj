@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
+    <Description>Bring back MVC 5.x bundles to ASP.NET Core</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>Add ViewComponent for AspNetCore.ClassicBundles</Description>
+    <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
