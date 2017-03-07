@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using NUglify;
 using NUglify.JavaScript;
@@ -71,6 +72,12 @@ namespace AspNetCore.ClassicBundles
             var outPath = Path.Combine(BundleCollection.Instance.RootPath, this.BundlePath.Replace("~/", string.Empty));
             File.WriteAllText(outPath, min.Code);
             SetIdentifier(min);
+        }
+
+        public  Task<Bundle> PrepareAsync()
+        {
+            Prepare();
+            return Task.FromResult(this);
         }
 
       

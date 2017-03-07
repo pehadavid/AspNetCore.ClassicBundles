@@ -32,18 +32,18 @@ namespace AspNetCore.ClassicBundles.Demo
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            ConfigureBundles(BundleCollection.Instance, env);
+            await ConfigureBundles(BundleCollection.Instance, env);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
 
                 // Browser Link is not compatible with Kestrel 1.1.0
                 // For details on enabling Browser Link, see https://go.microsoft.com/fwlink/?linkid=840936
-                // app.UseBrowserLink();
+               // app.UseBrowserLink();
             }
             else
             {
@@ -60,19 +60,22 @@ namespace AspNetCore.ClassicBundles.Demo
             });
         }
 
-        public void ConfigureBundles(BundleCollection bundles, IHostingEnvironment env)
+        public  Task ConfigureBundles(BundleCollection bundles, IHostingEnvironment env)
         {
             bundles.IsMinMode = !env.IsDevelopment();
             bundles.RootPath = env.WebRootPath;
 
-            bundles.Add(new ScriptBundle("~/js/my-little-bundle.js")
-                .Include("~/lib/jquery/dist/jquery.js")
-                .Include("~/lib/bootstrap/dist/js/bootstrap.js")
-                .Include("~/js/site.js"));
+            var b1 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle.js")
+                 .Include("~/lib/jquery/dist/jquery.js")
+                 .Include("~/lib/bootstrap/dist/js/bootstrap.js")
+                 .Include("~/js/site.js"));
 
-            bundles.Add(new StyleBundle("~/css/my-css-bundle.css")
-                .Include("~/lib/bootstrap/dist/css/bootstrap.css"
-                , "~/css/site.css"));
+            var b2 = bundles.AddAsync(new StyleBundle("~/css/my-css-bundle.css")
+                 .Include("~/lib/bootstrap/dist/css/bootstrap.css"
+                 , "~/css/site.css"));
+
+            Task.WaitAll(b1, b2);
+            return Task.CompletedTask;
 
         }
     }
