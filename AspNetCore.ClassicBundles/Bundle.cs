@@ -41,7 +41,9 @@ namespace AspNetCore.ClassicBundles
 
         public virtual Bundle IncludeDirectory(string directoryPath, string pattern)
         {
-            ExpManager.ThrowIfFalse(!Directory.Exists(directoryPath));
+            directoryPath = directoryPath.Replace("~/", string.Empty);
+            directoryPath = Path.Combine(BundleCollection.Instance.RootPath, directoryPath);
+            ExpManager.ThrowIfFalse(Directory.Exists(directoryPath));
             var files = Directory.GetFiles(directoryPath, pattern);
             return Include(files);
         }

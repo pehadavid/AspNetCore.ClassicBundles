@@ -16,5 +16,11 @@ namespace AspNetCore.ClassicBundles
             if (!condition)
                 throw new InvalidDataException();
         }
+
+        public static void ThrowIfTrue(bool condition)
+        {
+            if (!condition)
+                throw new InvalidDataException();
+        }
     }
 }
