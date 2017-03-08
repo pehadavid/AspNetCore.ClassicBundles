@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>netstandard1.6;net452</TargetFrameworks>
     <Description>Bring back MVC 5.x bundles to ASP.NET Core</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
@@ -14,5 +14,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="1.1.0" />
     <PackageReference Include="NUglify" Version="1.5.5" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
 
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+
+  </ItemGroup>
+  
 </Project>
