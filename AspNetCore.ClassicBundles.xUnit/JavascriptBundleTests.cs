@@ -18,7 +18,7 @@ namespace AspNetCore.ClassicBundles.xUnit
 
         private void PrepareAssets()
         {
-             tempPath = Path.GetTempPath();
+            tempPath = Path.GetTempPath();
             var JsFile1Content = @"document.addEventListener(""DOMActivate"",
                         function(e) {
 
@@ -42,6 +42,14 @@ alert(""a total of "" + divs.length + "" divs in this page."");";
             jsFiles.Add("file-1.js");
             jsFiles.Add("file-2.js");
 
+            if (!Directory.Exists(Path.Combine(tempPath, "utdir")))
+            {
+                Directory.CreateDirectory(Path.Combine(tempPath, "utdir"));
+            }
+
+            File.Copy(fp1, Path.Combine(tempPath,"utdir","file-1.js"), true);
+            File.Copy(fp2, Path.Combine(tempPath, "utdir", "file-2.js"),true);
+
         }
         [Fact]
         public void TestJsBundleSimpleFiles()
@@ -55,6 +63,16 @@ alert(""a total of "" + divs.length + "" divs in this page."");";
             Assert.True(File.Exists(Path.Combine(tempPath, "my-test-bundle.js")));
         }
 
+        [Fact]
+        public void TestJsIncludeDirectory()
+        {
+            var instance = BundleCollection.Instance;
+            var assetsPath = tempPath;
+            instance.RootPath = assetsPath;
+            var jsBundle = new ScriptBundle("~/my-test-dir-bundle.js").IncludeDirectory("~/utdir", "file-*.js");
+            instance.Add(jsBundle);
+            Assert.True(File.Exists(Path.Combine(tempPath, "my-test-dir-bundle.js")));
+        }
         public void Dispose()
         {
             

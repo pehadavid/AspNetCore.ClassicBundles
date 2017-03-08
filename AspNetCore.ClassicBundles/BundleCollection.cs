@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace AspNetCore.ClassicBundles
 {
@@ -9,7 +10,7 @@ namespace AspNetCore.ClassicBundles
             new Lazy<BundleCollection>(() => new BundleCollection());
 
         public static BundleCollection Instance => lazy.Value;
-        public  bool IsMinMode { get; set; }
+        public bool IsMinMode { get; set; }
         public string RootPath { get; set; }
 
         private ConcurrentDictionary<string, Bundle> bundlesDictionary;
@@ -28,6 +29,12 @@ namespace AspNetCore.ClassicBundles
             this.bundlesDictionary.TryAdd(bundle.BundlePath, bundle);
             bundle.Prepare();
             return bundle;
+        }
+
+        public Task<Bundle> AddAsync(Bundle bundle)
+        {
+            this.bundlesDictionary.TryAdd(bundle.BundlePath, bundle);
+            return bundle.PrepareAsync();
         }
 
     }

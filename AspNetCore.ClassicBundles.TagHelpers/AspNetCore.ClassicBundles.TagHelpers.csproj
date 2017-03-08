@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>netstandard1.6;net452</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Description>Add ViewComponent for AspNetCore.ClassicBundles</Description>
+    <Description>Add View Components for AspNetCore.ClassicBundles</Description>
     <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
     <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -18,5 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AspNetCore.ClassicBundles\AspNetCore.ClassicBundles.csproj" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
 
+  </ItemGroup>
 </Project>
