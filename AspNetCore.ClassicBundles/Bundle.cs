@@ -16,7 +16,7 @@ namespace AspNetCore.ClassicBundles
         protected List<string> filesPath;
         protected List<string> WebsPathList;
         public string VersionIdentifier { get; protected set; }
-        protected Func<string, UgliflyResult> MinFunc;
+        protected Func<string, NUglify.UglifyResult> MinFunc;
 
         protected Bundle(string bundlePath)
         {
@@ -49,7 +49,7 @@ namespace AspNetCore.ClassicBundles
             return Include(files);
         }
 
-        protected void SetIdentifier(UgliflyResult min)
+        protected void SetIdentifier(UglifyResult min)
         {
             SHA256 sha256 = SHA256.Create();
             var hashResult = sha256.ComputeHash(Encoding.Unicode.GetBytes(min.Code));
