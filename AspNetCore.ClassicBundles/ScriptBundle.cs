@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Html;
 using NUglify;
@@ -22,9 +23,9 @@ namespace AspNetCore.ClassicBundles
         public override HtmlString FlatRender()
         {
             string result = string.Empty;
-            foreach (string fp in WebsPathList)
+            foreach (var item in Pathes)
             {
-                result += $"<script  type=\"text/javascript\" src=\"{fp}\"></script>";
+                result += $"<script  type=\"text/javascript\" src=\"{item.Key}\"></script>";
             }
 
             return new HtmlString(result);
@@ -35,7 +36,16 @@ namespace AspNetCore.ClassicBundles
            return new HtmlString($"<script  type=\"text/javascript\" src=\"{this.BundlePath.Replace("~/","/")}?v={this.VersionIdentifier}\"></script>");
         }
 
-   
+    
 
+        public override string GetResponseContentType()
+        {
+            return "application/javascript";
+        }
+
+        public override string GetContentText()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

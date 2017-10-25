@@ -12,7 +12,7 @@ namespace AspNetCore.ClassicBundles
     {
         public StyleBundle(string bundlePath) : base(bundlePath)
         {
-            this.MinFunc = s=>Uglify.Css(s);
+            this.MinFunc = s => Uglify.Css(s);
         }
 
 
@@ -20,9 +20,9 @@ namespace AspNetCore.ClassicBundles
         public override HtmlString FlatRender()
         {
             string result = string.Empty;
-            foreach (string fp in WebsPathList)
+            foreach (var item in this.Pathes)
             {
-                result += $"<link rel=\"stylesheet\" type=\"text/css\" href=\"{fp}\"  />";
+                result += $"<link rel=\"stylesheet\" type=\"text/css\" href=\"{item.Key}\"  />";
             }
 
             return new HtmlString(result);
@@ -34,5 +34,14 @@ namespace AspNetCore.ClassicBundles
         }
 
 
+        public override string GetResponseContentType()
+        {
+            return "text/css";
+        }
+
+        public override string GetContentText()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
