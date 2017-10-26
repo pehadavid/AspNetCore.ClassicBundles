@@ -80,7 +80,8 @@ And
 ```
 
 ## TODO
-- [ ] More unit tests
-- [ ] WildCard Patterns Support
+- [x] More unit tests
+- [ ] In Memory bundles and Middleware (instead of a physical file)
+- [x] WildCard Patterns Support
 - [ ] IncludeDirectory *Full* Support
 - [ ] Performances improvements
