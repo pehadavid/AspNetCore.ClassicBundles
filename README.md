@@ -3,9 +3,7 @@ This repository host the source code for AspNetCore.ClassicBundles
 
 ## Introduction
 
-If you are new to ASP.Net core, you should know that JS & CSS bundles are no more handled by ASP.NET. Instead, you have to use somes post build tasks to create your bundles. Theses NuGet packages will help you
-to restore the old fashioned bundles.
-
+If you are new to ASP.Net core, you should know that JS & CSS bundles are no more handled by ASP.NET. Instead, you have to use some post-build tasks to create your bundles. Theses NuGet packages allow to create bundles directly in your C# code, like you used to do in MVC 5.x.
 ## What you need to know
 
 AspNetCore.ClassicBundles basically works the same way as MVC 5.x bundles, but there is some differences. 
@@ -27,33 +25,35 @@ Note : Packages are currently available in a pre-release state.
 Configure your BundleCollection on your Startup.cs
 
 ```c#
- // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+ 
  public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 {
 	...
-	ConfigureBundles(BundleCollection.Instance, env);
+	app.UseBundles(env,  bundles =>
+            {
+               
+
+                //you can enable/disable min mode here :
+                bundles.IsMinMode = true;
+                var b1 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle.js")
+                    .Include("~/lib/jquery/dist/jquery.js")
+                    .Include("~/lib/bootstrap/dist/js/bootstrap.js")
+                    .Include("~/js/site.js"));
+
+                var b2 = bundles.AddAsync(new StyleBundle("~/css/my-css-bundle.css")
+                    .Include("~/lib/bootstrap/dist/css/bootstrap.css"
+                        , "~/css/site.css"));
+
+                Task.WaitAll(b1, b2);
+                app.UseStaticFiles();
+
+            });
 	...
 }
 
 ```
 
-Then configure your bundles by adding the following method
-```c#
-public void ConfigureBundles(BundleCollection bundles, IHostingEnvironment env)
-{
-	bundles.IsMinMode = !env.IsDevelopment(); 
-	bundles.RootPath = env.WebRootPath;
-	//then, you can add your bundles like you used to do in MVC 5.x
-	bundles.Add(new ScriptBundle("~/js/my-little-bundle.js")
-                .Include("~/lib/jquery/dist/jquery.js")
-                .Include("~/lib/bootstrap/dist/js/bootstrap.js")
-                .Include("~/js/site.js"));
 
-	bundles.Add(new StyleBundle("~/css/my-css-bundle.css")
-                .Include("~/lib/bootstrap/dist/css/bootstrap.css"
-                , "~/css/site.css"));
-}
-```
 
 Now, you can use
 
@@ -80,8 +80,6 @@ And
 ```
 
 ## TODO
-- [x] More unit tests
-- [ ] In Memory bundles and Middleware (instead of a physical file)
-- [x] WildCard Patterns Support
+- [ ] In Memory bundles (instead of a physical file)
 - [ ] IncludeDirectory *Full* Support
 - [ ] Performances improvements
