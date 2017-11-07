@@ -18,7 +18,7 @@ namespace AspNetCore.ClassicBundles
         }
         public HtmlString Render(string bundlePath)
         {
-            var bundle = BundleCollection.Instance.GetBundle(bundlePath);
+            var bundle = BundleCollection.Instance.Find(bundlePath);
             ExpManager.ThrowIfNull(bundle);
             //bundle management : dev -> multipletags, prod -> one bundle
             return BundleCollection.Instance.IsMinMode ? MinRender(bundle) : FlatRender(bundle);

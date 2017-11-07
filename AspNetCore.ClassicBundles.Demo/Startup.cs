@@ -32,25 +32,42 @@ namespace AspNetCore.ClassicBundles.Demo
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public  void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseBundles(env,  bundles =>
+            {
+               
+
+                //you can enable/disable min mode here :
+                bundles.IsMinMode = true;
+                var b1 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle.js")
+                    .Include("~/lib/jquery/dist/jquery.js")
+                    .Include("~/lib/bootstrap/dist/js/bootstrap.js")
+                    .Include("~/js/site.js"));
+
+                var b2 = bundles.AddAsync(new StyleBundle("~/css/my-css-bundle.css")
+                    .Include("~/lib/bootstrap/dist/css/bootstrap.css"
+                        , "~/css/site.css"));
+
+                Task.WaitAll(b1, b2);
+                app.UseStaticFiles();
+
+            });
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            await ConfigureBundles(BundleCollection.Instance, env);
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
 
-                // Browser Link is not compatible with Kestrel 1.1.0
-                // For details on enabling Browser Link, see https://go.microsoft.com/fwlink/?linkid=840936
-               // app.UseBrowserLink();
+
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            
 
             app.UseMvc(routes =>
             {
@@ -60,23 +77,6 @@ namespace AspNetCore.ClassicBundles.Demo
             });
         }
 
-        public  Task ConfigureBundles(BundleCollection bundles, IHostingEnvironment env)
-        {
-            bundles.IsMinMode = !env.IsDevelopment();
-            bundles.RootPath = env.WebRootPath;
-
-            var b1 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle.js")
-                 .Include("~/lib/jquery/dist/jquery.js")
-                 .Include("~/lib/bootstrap/dist/js/bootstrap.js")
-                 .Include("~/js/site.js"));
-
-            var b2 = bundles.AddAsync(new StyleBundle("~/css/my-css-bundle.css")
-                 .Include("~/lib/bootstrap/dist/css/bootstrap.css"
-                 , "~/css/site.css"));
-
-            Task.WaitAll(b1, b2);
-            return Task.CompletedTask;
-
-        }
+       
     }
 }

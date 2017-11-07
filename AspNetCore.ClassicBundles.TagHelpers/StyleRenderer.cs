@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
@@ -7,15 +8,18 @@ namespace AspNetCore.ClassicBundles.TagHelpers
     [ViewComponent(Name = "StyleRenderer")]
     public class StyleRenderer : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(string bundlePath)
+        public  Task<IViewComponentResult> InvokeAsync(string bundlePath)
         {
 
-            var bundle = BundleCollection.Instance.GetBundle(bundlePath);
-            if (BundleCollection.Instance.IsMinMode)
+            var bundle = BundleCollection.Instance.Find(bundlePath);
+            if (bundle == null)
             {
-                return new HtmlContentViewComponentResult(bundle.MinRender());
+                return EmptyRenderer.GetAsync(bundlePath);
             }
-            return new HtmlContentViewComponentResult(bundle.FlatRender());
+            
+         
+            var result =  BundleCollection.Instance.IsMinMode ? new HtmlContentViewComponentResult(bundle.MinRender()) : new HtmlContentViewComponentResult(bundle.FlatRender());
+            return Task.FromResult<IViewComponentResult>(result);
         }
 
     }
