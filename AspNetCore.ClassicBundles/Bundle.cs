@@ -39,8 +39,7 @@ namespace AspNetCore.ClassicBundles
             {
                 var simplePath = fp.Replace("~/", String.Empty);
                 var fullPath = Path.Combine(BundleCollection.Instance.RootPath, simplePath);
-                var fopen = new Uri($"file:///{fullPath}");
-                fullPath = fopen.LocalPath;
+ 
                 this.Pathes.Add($"/{simplePath}", fullPath);
 
                 
