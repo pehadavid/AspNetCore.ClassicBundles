@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <Version>2.0.0</Version>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
   </PropertyGroup>
 
   <ItemGroup>
