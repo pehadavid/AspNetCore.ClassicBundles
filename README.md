@@ -7,7 +7,7 @@ If you are new to ASP.Net core, you should know that JS & CSS bundles are no mor
 ## What you need to know
 
 AspNetCore.ClassicBundles basically works the same way as MVC 5.x bundles, but there is some differences. 
-- Unlike System.Web.Optimization, it creates physically files. When you are declaring "~/bundles/my-little-bundle.js", it will create the file on your disk.
+- Unlike System.Web.Optimization, it creates physically files. When you are declaring "~/bundles/my-little-bundle.js", it will create the file on your disk. 
 - Some functions are not yet implemented, or do not look like the original. You may only use .Include("~/js/my-bundle-without-any-wildcard.js"). Keep an eye on my TODO List to see what features will be backported.
 
 ## Getting started
@@ -81,6 +81,7 @@ And
 
 ## TODO
 - [x] Linux Hosting Support (fixed in 2.0.1)
+- [ ] Bundle live update (when a source file is modified on disk)
 - [ ] In Memory bundles (instead of a physical file)
 - [ ] IncludeDirectory *Full* Support
 - [ ] Performances improvements
