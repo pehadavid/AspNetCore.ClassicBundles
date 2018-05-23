@@ -31,7 +31,6 @@ namespace AspNetCore.ClassicBundles
      
         }
 
-
         public virtual Bundle Include(params string[] filePath)
         {
 
@@ -39,21 +38,12 @@ namespace AspNetCore.ClassicBundles
             {
                 var simplePath = fp.Replace("~/", String.Empty);
                 var fullPath = Path.Combine(BundleCollection.Instance.RootPath, simplePath);
- 
-                this.Pathes.Add($"/{simplePath}", fullPath);
-
-                
-
+                this.Pathes.Add($"/{simplePath}", fullPath);            
             }
            
             return this;
         }
-
-       
-
-      
-
-     
+        
         public virtual Bundle IncludeDirectory(string directoryPath, string pattern)
         {
             directoryPath = directoryPath.Replace("~/", string.Empty);
@@ -79,6 +69,10 @@ namespace AspNetCore.ClassicBundles
             var fullContent = string.Empty;
             foreach (var item in this.Pathes)
             {
+                if (!File.Exists(item.Value) && BundleCollection.Instance.DontThrowOnMissingFile)
+                    continue;
+                
+
                 var fContent = File.ReadAllText(item.Value);
                 fContent = Relocate(fContent, item.Key);
                 fullContent += fContent;
@@ -114,8 +108,12 @@ namespace AspNetCore.ClassicBundles
 
         public Task<Bundle> PrepareAsync()
         {
-            Prepare();
-            return Task.FromResult(this);
+
+            return Task.Factory.StartNew<Bundle>(() =>
+            {
+                Prepare();
+                return this;
+            });
         }
 
 

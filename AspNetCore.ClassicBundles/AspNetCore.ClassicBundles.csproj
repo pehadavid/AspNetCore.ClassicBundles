@@ -7,8 +7,11 @@
     <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
     <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+    <PackageTags>aspnet core bundles</PackageTags>
+    <AssemblyVersion>2.0.2.0</AssemblyVersion>
+    <FileVersion>2.0.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

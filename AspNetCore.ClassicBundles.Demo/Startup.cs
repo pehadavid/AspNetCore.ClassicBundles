@@ -40,6 +40,7 @@ namespace AspNetCore.ClassicBundles.Demo
 
                 //you can enable/disable min mode here :
                 bundles.IsMinMode = true;
+                bundles.DontThrowOnMissingFile = true; //dont throw when a file in missing in bundles
                 var b1 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle.js")
                     .Include("~/lib/jquery/dist/jquery.js")
                     .Include("~/lib/bootstrap/dist/js/bootstrap.js")

@@ -15,6 +15,7 @@ namespace AspNetCore.ClassicBundles
 
         public static BundleCollection Instance => lazy.Value;
         public bool IsMinMode { get; set; }
+        public bool DontThrowOnMissingFile { get; set; }
         public string RootPath { get; set; }
 
         private ConcurrentDictionary<string, Bundle> bundlesDictionary;
@@ -25,6 +26,7 @@ namespace AspNetCore.ClassicBundles
             this.bundlesDictionary = new ConcurrentDictionary<string, Bundle>();
             this.Watchers = new List<FileSystemWatcher>();
             this.FileNames = new List<string>();
+            this.DontThrowOnMissingFile = false;
         }
 
         //public Bundle GetBundle(string bundlePath)
@@ -88,7 +90,7 @@ namespace AspNetCore.ClassicBundles
                 EnableRaisingEvents = true
             };
             watcher.Changed += Watcher_Changed;
-
+            watcher.Renamed += Watcher_Changed;
             this.Watchers.Add(watcher);
         }
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
