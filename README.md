@@ -33,8 +33,11 @@ Configure your BundleCollection on your Startup.cs
             {
                
 
-                //you can enable/disable min mode here :
+                //If you want to handle min mode manually you can set IsMinMode to true. 
+		//By default, resources are minified and bundled when environment is set to production
                 bundles.IsMinMode = true;
+		//use DontThrowOnMissingFile if you want to ignore missing resources and avoid Exceptions.
+		bundles.DontThrowOnMissingFile = true;
                 var b1 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle.js")
                     .Include("~/lib/jquery/dist/jquery.js")
                     .Include("~/lib/bootstrap/dist/js/bootstrap.js")
@@ -45,7 +48,7 @@ Configure your BundleCollection on your Startup.cs
                         , "~/css/site.css"));
 
                 Task.WaitAll(b1, b2);
-                app.UseStaticFiles();
+
 
             });
 	...
@@ -81,7 +84,7 @@ And
 
 ## TODO
 - [x] Linux Hosting Support (fixed in 2.0.1)
-- [ ] Bundle live update (when a source file is modified on disk)
+- [x] Bundle live update (when a source file is modified on disk, available since 2.0.2)
 - [ ] In Memory bundles (instead of a physical file)
 - [ ] IncludeDirectory *Full* Support
 - [ ] Performances improvements
