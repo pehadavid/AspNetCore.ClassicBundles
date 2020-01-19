@@ -7,9 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Http;
 using NUglify;
-using NUglify.JavaScript;
 
 namespace AspNetCore.ClassicBundles
 {

@@ -34,6 +34,8 @@ namespace AspNetCore.ClassicBundles.Demo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public  void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+
+            app.UseRouting();
             app.UseBundles(env,  bundles =>
             {
                
@@ -54,8 +56,7 @@ namespace AspNetCore.ClassicBundles.Demo
                 app.UseStaticFiles();
 
             });
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+   
            
             if (env.IsDevelopment())
             {
@@ -69,13 +70,11 @@ namespace AspNetCore.ClassicBundles.Demo
             }
 
             
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints => {
+     
+                endpoints.MapControllers();
             });
+        
         }
 
        
