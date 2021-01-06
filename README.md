@@ -85,6 +85,6 @@ And
 ## TODO
 - [x] Linux Hosting Support (fixed in 2.0.1)
 - [x] Bundle live update (when a source file is modified on disk, available since 2.0.2)
-- [ ] In Memory bundles (instead of a physical file)
+- [x] Performances improvements
 - [ ] IncludeDirectory *Full* Support
-- [ ] Performances improvements
+
