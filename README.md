@@ -20,7 +20,7 @@ Install NuGet package(s) :
 - The first one is mandatory : AspNetCore.ClassicBundles
 - The second one is optional : AspNetCore.ClassicBundle.TagHelpers. It will allow you to use some tag helpers instead of @Scripts.Render and @Styles.Render.
 
-Note : latest version support ASP.NET core 3.1 only.
+Note : latest version support ASP.NET core 3.1 and later.
 
 Configure your BundleCollection on your Startup.cs
 

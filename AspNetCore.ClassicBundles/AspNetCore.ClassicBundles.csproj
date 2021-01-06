@@ -7,18 +7,18 @@
     <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
     <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>3.1.0</Version>
+    <Version>5.0.0</Version>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <PackageTags>aspnet core bundles</PackageTags>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
-    <FileVersion>3.1.0.0</FileVersion>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="NUglify" Version="1.5.13" />
+    <PackageReference Include="NUglify" Version="1.13.1" />
   </ItemGroup>
  
 
