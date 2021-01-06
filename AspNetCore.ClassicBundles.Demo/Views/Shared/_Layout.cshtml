@@ -1,5 +1,5 @@
 ﻿@using AspNetCore.ClassicBundles
-@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+
 @addTagHelper *,AspNetCore.ClassicBundles.TagHelpers
 <!DOCTYPE html>
 <html>
@@ -7,10 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AspNetCore.ClassicBundles.Demo</title>
-
     <vc:style-renderer bundle-path="~/css/my-css-bundle.css" /> @* You can use  @Styles.Render("~/css/my-css-bundle.css") *@
-
-    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
