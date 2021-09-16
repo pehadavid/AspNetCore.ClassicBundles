@@ -45,7 +45,15 @@ namespace AspNetCore.ClassicBundles
             setCollectionAction(BundleCollection.Instance);
             bundles.ApplyMonitoring();
             return builder.UseMiddleware<BundleHandlerMiddleware>();
-           
+        }
+        
+        public static IApplicationBuilder UseBundles(this IApplicationBuilder builder, IWebHostEnvironment env, Action<BundleCollection> setCollectionAction)
+        {
+            var bundles = BundleCollection.Instance;
+            bundles.RootPath = env.WebRootPath;
+            setCollectionAction(BundleCollection.Instance);
+            bundles.ApplyMonitoring();
+            return builder.UseMiddleware<BundleHandlerMiddleware>();
         }
     }
 }

@@ -7,11 +7,11 @@
     <PackageProjectUrl>https://github.com/papci/AspNetCore.ClassicBundles</PackageProjectUrl>
     <RepositoryUrl>https://github.com/papci/AspNetCore.ClassicBundles</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>5.0.0</Version>
+    <Version>5.0.1</Version>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <PackageTags>aspnet core bundles</PackageTags>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
-    <FileVersion>5.0.0.0</FileVersion>
+    <AssemblyVersion>5.0.0.1</AssemblyVersion>
+    <FileVersion>5.0.0.1</FileVersion>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
