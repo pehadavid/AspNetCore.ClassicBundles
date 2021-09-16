@@ -47,7 +47,9 @@ namespace AspNetCore.ClassicBundles.Demo
                     .Include("~/lib/jquery/dist/jquery.js")
                     .Include("~/lib/bootstrap/dist/js/bootstrap.js")
                     .Include("~/js/site.js"));
-
+                var b3 = bundles.AddAsync(new ScriptBundle("~/js/my-little-bundle-2.js")
+                                                                                  .Include("~/lib/jquery/dist/jquery.js"));
+                
                 var b2 = bundles.AddAsync(new StyleBundle("~/css/my-css-bundle.css")
                     .Include("~/lib/bootstrap/dist/css/bootstrap.css"
                         , "~/css/site.css"));

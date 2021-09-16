@@ -59,7 +59,7 @@ namespace AspNetCore.ClassicBundles
 
         }
 
-        private void ConfigureWatchers(Dictionary<string, string> Pathes)
+        private void ConfigureWatchers(List<KeyValuePair<string, string>> Pathes)
         {
             foreach (var path in Pathes)
             {
@@ -122,7 +122,8 @@ namespace AspNetCore.ClassicBundles
         public void ApplyMonitoring()
         {
             var instance = Instance;
-            Dictionary<string, string> pathes = instance.bundlesDictionary.SelectMany(pair => pair.Value.Pathes).ToDictionary(kpair => kpair.Key, kpair => kpair.Value);
+            var pathes = instance.bundlesDictionary.SelectMany(pair => pair.Value.Pathes)
+                .ToList();
             ConfigureWatchers(pathes);
         }
     }
